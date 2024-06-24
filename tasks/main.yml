@@ -1,8 +1,4 @@
 ---
-- name: "Mock task"
-  ansible.builtin.debug:
-    msg: "hello, world!"
----
 - name: "Install unzip package"
   tags: [ loki ]
   ansible.builtin.apt:
