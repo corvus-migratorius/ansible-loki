@@ -1,37 +1,40 @@
-template
+loki
 =========
 
-Template for Ansible role monorepos
+Installs promtail with systemd service.
 
 Requirements
 ------------
 
-None
-
 Role Variables
 --------------
 
-None
+(optional)
+loki_version: version to install
 
 Dependencies
 ------------
 
-None
+No
 
 Example Playbook
 ----------------
 
-```yaml
-roles:
-    - role: genlab.template
-```
+    - hosts: servers
+      roles:
+         - role: loki
+           loki_version: 2.7.3
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
+
+Alexander Gorelyshev and Danilkin Danila (MIPT)
+
+Genlab LLC
 
 corvus-migratorius@proton.me

@@ -1,17 +1,14 @@
----
 galaxy_info:
-  role_name: "template"
+  role_name: loki
   namespace: genlab
-  author: "Alexander Gorelyshev"
-  company: "Genlab, LLC"
-  description: ""
-  license: "MIT"
+  author: Danilkin Danila
+  description: Installs Promtail
+
+  company: Genlab LLC
+  license: MIT
+
   min_ansible_version: "2.1"
 
-  platforms:
-    - name: "Ubuntu"
-      versions: [ "focal", "jammy" ]
-
-  galaxy_tags: [ ]
+  galaxy_tags: []
 
 dependencies: []
