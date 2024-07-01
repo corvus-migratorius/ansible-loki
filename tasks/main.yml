@@ -1,6 +1,5 @@
 ---
 - name: "Install unzip package"
-  tags: [ loki ]
   ansible.builtin.apt:
     name: unzip
     state: present
@@ -8,7 +7,6 @@
 
 
 - name: "Create Loki directories"
-  tags: [ loki ]
   with_items:
     - {path: '/opt/loki', mode: '0755'}
     - {path: '/etc/loki', mode: '0644'}
@@ -21,7 +19,6 @@
 
 
 - name: "Template Loki config file"
-  tags: [ loki ]
   notify: "Restart the Loki daemon"
   ansible.builtin.template:
     src: "loki.yml.j2"
@@ -32,7 +29,6 @@
 
 
 - name: "Install requested Loki version"
-  tags: [ loki ]
   block:
     - name: "Check Loki version"
       ansible.builtin.command: /opt/loki/loki -version
@@ -48,7 +44,6 @@
 
   rescue:
     - name: "Install Loki if it is not present"
-      tags: [ loki ]
       ansible.builtin.unarchive:
         src: "https://github.com/grafana/loki/releases/download/v\
              {{ loki_version }}/loki-linux-amd64.zip"
@@ -71,7 +66,6 @@
 
 
 - name: "Template the systemd unit file"
-  tags: [ loki ]
   notify: "Reload the Loki daemon configuration"
   ansible.builtin.template:
     src: templates/loki.service.j2
@@ -82,7 +76,6 @@
 
 
 - name: "Start and enable the Loki daemon"
-  tags: [ loki ]
   ansible.builtin.systemd:
     name: loki
     state: started
