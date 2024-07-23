@@ -1,1 +1,4 @@
 ---
+loki_version: 2.7.3
+loki_storage_path: /data/loki
+loki_port: 3100
