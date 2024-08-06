@@ -1,14 +1,17 @@
+---
 galaxy_info:
   role_name: loki
   namespace: genlab
-  author: Danilkin Danila
-  description: Installs Promtail
-
-  company: Genlab LLC
-  license: MIT
-
+  author: "Danila Danilkin"
+  company: "Genlab, LLC"
+  description: "Deploy Loki as a systemd service"
+  license: "MIT"
   min_ansible_version: "2.1"
 
-  galaxy_tags: []
+  platforms:
+    - name: "Ubuntu"
+      versions: [ "focal", "jammy" ]
+
+  galaxy_tags: [ ]
 
 dependencies: []
