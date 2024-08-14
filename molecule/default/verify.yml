@@ -18,3 +18,13 @@
       ansible.builtin.uri:
         url: "http://localhost:{{ loki_port }}/metrics"
         return_content: true
+
+    - name: "Ensure that locgli is installed and able to run"
+      ansible.builtin.command: 
+        cmd: logcli --addr="http://localhost:{{ loki_port }}" query '{job="varlogs"}'
+      register: cmd1
+    
+    - debug: 
+        var: cmd1
+
+
