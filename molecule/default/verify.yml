@@ -23,8 +23,12 @@
       ansible.builtin.command: 
         cmd: logcli --addr="http://localhost:{{ loki_port }}" query '{job="varlogs"}'
       register: cmd1
-    
-    - debug: 
+      failed_when: "cmd1.rc != 0"
+
+    - name: "Debug logcli command output"
+      ansible.builtin.debug:
         var: cmd1
+    
+
 
 
