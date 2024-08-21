@@ -63,6 +63,22 @@
       ansible.builtin.file:
         path: /opt/loki/loki-linux-amd64
         state: absent
+        
+    - name: "Install logcli"
+      ansible.builtin.unarchive:
+        src: "https://github.com/grafana/loki/releases/download/v\
+                {{ loki_version }}/logcli-linux-amd64.zip"
+        dest: /usr/local/bin
+        remote_src: true
+
+    - name: "Rename and set permissions for the Logcli binary"
+      ansible.builtin.copy:
+        src: "/usr/local/bin/logcli-linux-amd64"
+        dest: "/usr/local/bin/logcli"
+        owner: root
+        group: root
+        mode: "0755"
+        remote_src: true
 
 - name: "Template the systemd unit file"
   notify: "Reload the Loki daemon configuration"
@@ -79,23 +95,4 @@
     state: started
     enabled: true
 
-- name: "Install logcli"
-  ansible.builtin.unarchive:
-    src: "https://github.com/grafana/loki/releases/download/v\
-             {{ loki_version }}/logcli-linux-amd64.zip"
-    dest: /usr/local/bin
-    remote_src: true
 
-- name: "Rename and set permissions for the Loki binary"
-  ansible.builtin.copy:
-    src: "/usr/local/bin/logcli-linux-amd64"
-    dest: "/usr/local/bin/logcli"
-    owner: root
-    group: root
-    mode: "0755"
-    remote_src: true
-
-- name: "Cleanup downloaded file"
-  ansible.builtin.file:
-    path: /opt/loki/logcli-linux-amd64
-    state: absent
