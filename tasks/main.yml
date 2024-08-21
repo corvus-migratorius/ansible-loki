@@ -80,6 +80,11 @@
         mode: "0755"
         remote_src: true
 
+    - name: "Cleanup downloaded file"
+      ansible.builtin.file:
+        path: /usr/local/bin/logcli-linux-amd64
+        state: absent
+
 - name: "Template the systemd unit file"
   notify: "Reload the Loki daemon configuration"
   ansible.builtin.template:
