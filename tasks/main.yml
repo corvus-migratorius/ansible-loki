@@ -94,5 +94,3 @@
     name: loki
     state: started
     enabled: true
-
-

@@ -21,14 +21,12 @@
 
     - name: "Ensure that locgli is installed and able to run"
       ansible.builtin.command: 
-        cmd: logcli --addr="http://localhost:{{ loki_port }}" query '{job="varlogs"}'
+        cmd: logcli --version
       register: cmd1
-      failed_when: "cmd1.rc != 0"
+      failed_when: cmd1.rc != 0
 
-    - name: "Debug logcli command output"
-      ansible.builtin.debug:
-        var: cmd1
-    
-
-
-
+    - name: "Check logcli version"
+      ansible.builtin.assert:
+        that: "'version {{ loki_version }}' in cmd1.stderr"
+        success_msg: "logcli version {{ loki_version }} is installed and working"
+        fail_msg: "logcli version {{ loki_version }} is not installed or not working correctly"
