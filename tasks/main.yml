@@ -43,7 +43,7 @@
         fail_msg: "Expected version '{{ loki_version }}'; available is '{{ loki_version_check.stdout }}'"
 
   rescue:
-    - name: "Install Loki if it is not present"
+    - name: "Install Loki if it is not present ({{ loki_version }})"
       ansible.builtin.unarchive:
         src: "https://github.com/grafana/loki/releases/download/v\
              {{ loki_version }}/loki-linux-amd64.zip"
