@@ -20,6 +20,7 @@
         return_content: true
 
     - name: "Ensure that locgli is installed and able to run"
+      changed_when: false
       ansible.builtin.command: 
         cmd: logcli --version
       register: cmd1

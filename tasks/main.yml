@@ -63,7 +63,7 @@
       ansible.builtin.file:
         path: /opt/loki/loki-linux-amd64
         state: absent
-        
+
     - name: "Install logcli"
       ansible.builtin.unarchive:
         src: "https://github.com/grafana/loki/releases/download/v\
