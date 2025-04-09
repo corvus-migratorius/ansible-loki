@@ -95,3 +95,5 @@
     group: root
     mode: "0755"
 
+- name: "Flush handlers"
+  ansible.builtin.meta: "flush_handlers"
