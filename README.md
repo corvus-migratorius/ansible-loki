@@ -10,9 +10,9 @@ Role Variables
 --------------
 
 ```yaml
-loki_version: Loki version to be deployed
-loki_storage_path: where to put Loki's files, including log data and positions (default: /data/loki)
-loki_port: Loki will listen on this port (default: 3000)
+version: Loki version to be deployed
+storage_path: where to put Loki's files, including log data and positions (default: /data/loki)
+network_port: Loki will listen on this port (default: 3000)
 ```
 
 Dependencies
@@ -26,7 +26,7 @@ Example Playbook
 ```yaml
 roles:
   - role: loki
-    loki_version: 2.7.3
+    version: 2.7.3
 ```
       
 

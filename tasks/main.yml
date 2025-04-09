@@ -32,21 +32,21 @@
   block:
     - name: "Check Loki version"
       ansible.builtin.command: /opt/loki/loki -version
-      register: loki_version_check
+      register: version_check
       changed_when: false
 
     - name: "Assert version correctness"
       notify: "Restart the Loki daemon"
       ansible.builtin.assert:
-        that: "loki_version in loki_version_check.stdout"
-        success_msg: "Expected Loki version available ({{ loki_version }})"
-        fail_msg: "Expected version '{{ loki_version }}'; available is '{{ loki_version_check.stdout }}'"
+        that: "version in version_check.stdout"
+        success_msg: "Expected Loki version available ({{ version }})"
+        fail_msg: "Expected version '{{ version }}'; available is '{{ version_check.stdout }}'"
 
   rescue:
-    - name: "Install Loki if it is not present ({{ loki_version }})"
+    - name: "Install Loki if it is not present ({{ version }})"
       ansible.builtin.unarchive:
         src: "https://github.com/grafana/loki/releases/download/v\
-             {{ loki_version }}/loki-linux-amd64.zip"
+             {{ version }}/loki-linux-amd64.zip"
         dest: /opt/loki/
         remote_src: true
 
@@ -67,7 +67,7 @@
     - name: "Install logcli"
       ansible.builtin.unarchive:
         src: "https://github.com/grafana/loki/releases/download/v\
-                {{ loki_version }}/logcli-linux-amd64.zip"
+                {{ version }}/logcli-linux-amd64.zip"
         dest: /usr/local/bin
         remote_src: true
 

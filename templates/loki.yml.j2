@@ -1,18 +1,18 @@
 auth_enabled: false
 
 server:
-  http_listen_port: {{ loki_port }}
   # grpc_listen_port: 9096
+  http_listen_port: {{ network_port }}
   # log_level: debug
   # grpc_server_max_concurrent_streams: 1000
 
 common:
   instance_addr: 127.0.0.1
-  path_prefix: {{ loki_storage_path }}
+  path_prefix: {{ storage_path }}
   storage:
     filesystem:
-      chunks_directory: {{ loki_storage_path }}/chunks
-      rules_directory: {{ loki_storage_path }}/rules
+      chunks_directory: {{ storage_path }}/chunks
+      rules_directory: {{ storage_path }}/rules
   replication_factor: 1
   ring:
     kvstore:
