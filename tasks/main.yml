@@ -94,6 +94,29 @@
     group: root
     mode: "0755"
 
+- name: "Create directories for rules {{ item }}"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  with_items:
+    - {path: '/opt/loki', mode: '0755'}
+    - {path: '/etc/loki', mode: '0644'}
+
+
+- name: "Upload rule files"
+  notify: "Reload the Loki daemon configuration"
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ rule_storage_dir }}/{{ item | basename }}"
+    owner: root
+    group: root
+    mode: "0600"
+  with_fileglob:
+    - "{{ rule_source_dir }}/*.yml"
+
 - name: "Start and enable the Loki daemon"
   ansible.builtin.systemd:
     name: loki
