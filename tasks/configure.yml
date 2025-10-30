@@ -1,0 +1,22 @@
+- name: "Create directories for rules {{ item }}"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  with_items:
+    - "{{ rule_storage_dir }}"
+    - "{{ rule_tmp_dir }}"
+
+
+- name: "Upload rule files"
+  notify: "Reload the Loki daemon configuration"
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ rule_storage_dir }}/{{ item | basename }}"
+    owner: root
+    group: root
+    mode: "0600"
+  with_fileglob:
+    - "{{ rule_source_dir }}/*.yml"

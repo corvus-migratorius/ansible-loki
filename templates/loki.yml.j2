@@ -56,9 +56,9 @@ ruler:
   storage:
     type: local
     local:
-      directory: /etc/loki/rules
-  alertmanager_url: http://localhost:9093
-  rule_path: /tmp/loki/rules-tmp
+      directory: {{ rule_storage_dir }}
+  alertmanager_url: {{ alertmanager_url }}
+  rule_path: {{ rule_tmp_dir }}
 
 query_range:
   results_cache:
