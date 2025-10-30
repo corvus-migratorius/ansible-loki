@@ -1,0 +1,13 @@
+# molecule-tests/minimal-test-rule.yaml
+groups:
+  - name: molecule-quick-validation
+    rules:
+      - alert: MoleculeQuickTest
+        expr: count_over_time({job="molecule"} |= "QUICK_TEST" [30s]) >= 0
+        for: 0s
+        labels:
+          severity: info
+          test_env: "molecule"
+        annotations:
+          summary: "Molecule Quick Test - IGNORE"
+          description: "Quick validation that Loki rules are working in Molecule"

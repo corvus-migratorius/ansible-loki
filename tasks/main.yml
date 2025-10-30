@@ -2,4 +2,5 @@
   ansible.builtin.include_tasks: install.yml
 
 - name: "Configure Loki to use alert rules"
+  when: rule_source_dir is defined
   ansible.builtin.include_tasks: configure.yml
