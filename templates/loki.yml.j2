@@ -52,8 +52,19 @@ pattern_ingester:
 #   filesystem:
 #     directory: {{ loki_storage_path }}/chunks
 
-# ruler:
-#   alertmanager_url: http://localhost:9093
+ruler:
+  enable_api: true
+  enable_alertmanager_v2: true
+  enable_sharding: false
+  storage:
+    type: local
+    local:
+      directory: {{ rule_storage_dir }}
+  alertmanager_url: {{ alertmanager_url }}
+  rule_path: {{ rule_tmp_dir }}
+  ring:
+    kvstore:
+      store: inmemory
 
 query_range:
   results_cache:

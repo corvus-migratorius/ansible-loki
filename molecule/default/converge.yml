@@ -3,3 +3,4 @@
   hosts: all
   roles:
     - role: genlab.loki
+      rule_source_dir: molecule/default/test_rules.yml

@@ -2,3 +2,6 @@
 loki_version: 3.4.2
 loki_storage_path: /data/loki
 loki_port: 3100
+rule_storage_dir: /etc/loki/rules
+rule_tmp_dir: /tmp/loki/rules-temp
+alertmanager_url: http://localhost:9093
