@@ -19,7 +19,7 @@
 
 
 - name: "Template Loki config file"
-  notify: "Restart the Loki daemon"
+  notify: "Restart Loki service"
   ansible.builtin.template:
     src: "loki.yml.j2"
     dest: "/etc/loki/loki.yml"
@@ -36,7 +36,7 @@
       changed_when: false
 
     - name: "Assert version correctness"
-      notify: "Restart the Loki daemon"
+      notify: "Restart Loki service"
       ansible.builtin.assert:
         that: "loki_version in loki_version_check.stdout"
         success_msg: "Expected Loki version available ({{ loki_version }})"
@@ -86,7 +86,7 @@
         state: absent
 
 - name: "Template the systemd unit file"
-  notify: "Reload the Loki daemon configuration"
+  notify: "Restart Loki service"
   ansible.builtin.template:
     src: templates/loki.service.j2
     dest: /etc/systemd/system/loki.service
